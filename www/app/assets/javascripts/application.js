@@ -4,12 +4,8 @@
 // app/assets/javascripts/routes/.
 //
 require([
-  'angular', 
-  'app/app',
-  'app/controllers/app-controller',
   'domReady!'
 ],
-function (angular, app, controller) {
-  'use strict';    
-  angular.bootstrap(document.getElementById('content'), ['commission-today']);
+function () {
+  'use strict';
 });

@@ -17,7 +17,6 @@ modules:
 paths:
   jquery: 'jquery-min'
   domReady: 'requirejs/domReady'
-  angular: 'angular.min'
 
 # If you're including scripts that don't use the AMD module pattern and they
 # have dependencies on each other, see the RequireJS configuration instructions
@@ -26,9 +25,6 @@ paths:
 #   'pathName':
 #     dep: ['dependency','array']
 #     exports: 'exportPathName'
-shim:
-  angular:
-    exports: 'angular'
 
 # Finds require() dependencies inside a require() or define call and includes
 # them in the optimizer that concatenates all the JavaScript modules together.
