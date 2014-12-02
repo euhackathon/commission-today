@@ -26,15 +26,6 @@ sudo -u vagrant -H bash -l -c '/home/vagrant/.rvm/bin/rvm install ruby-2.1.3 \
 echo installing Bundler
 sudo -u vagrant -H bash -l -c 'gem install bundler -N'
 
-install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
 install 'ExecJS runtime' nodejs
-
-install 'PhantomJS dependencies' bzip2 libfontconfig1
-curl --silent -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-i686.tar.bz2 \
-  --output /opt/phantomjs.tar.bz2 \
-  && mkdir /opt/phantomjs \
-  && tar --extract --file=/opt/phantomjs.tar.bz2 --strip-components=1 \
-  --directory=/opt/phantomjs
-sudo ln -s /opt/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
 
 echo 'All done, carry on!'

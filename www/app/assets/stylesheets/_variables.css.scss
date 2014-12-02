@@ -1,0 +1,124 @@
+//=================================================================================
+//
+// CONSTANTS
+//
+//=================================================================================
+
+// COLOR PALETTE
+
+// Greyscale.
+$black: rgb(0,0,0);
+
+$greyscale_dark: rgb(87,87,87);
+$greyscale_midtone: rgb(128,128,128);
+$greyscale_light: rgb(171,171,171);
+$greyscale_lightest: rgb(252,252,252);
+
+$white: rgb(255,255,255);
+
+// Primary.
+$primary: rgb(137,209,226);
+$primary-dark: shade($primary, 25);
+$primary-darkest: shade($primary, 50);
+$primary-light: tint($primary, 25);
+$primary-lightest: tint($primary, 50);
+
+// Accents.
+$accentA-base: rgb(209,249,148);
+$accentA-light: tint($accentA-base, 25);
+$accentA-dark: shade($accentA-base, 50);
+$accentB: rgb(255,200,56);
+
+// Complements.
+$complement-base: rgb(242,144,191);
+$complementA: shade($complement-base, 50);
+$complementB: tint($complement-base, 50);
+
+// Notification colors.
+$alert-error-base: rgb(255,10,50);
+
+// Typography.
+//
+$text-accent-color:                 $primary-dark;
+$text-accent-hover-color:           $complementA;
+
+// Main
+//
+$main-highlight: $complementA;
+$main-header-bg: rgba($complementB, 0.2);
+$main-header-color: $black;
+$main-list-mark-color: $complementB;
+$main-border-color: $primary-dark;
+
+// Alert
+//
+$alert-color: $black;
+$alert-bg: $alert-error-base;
+$alert-border-color: $black;
+
+// END SEMANTIC COLOR VARIABLES
+
+
+
+// Animation settings.
+$animation-duration-slow: 100ms;
+$animation-duration-base: 50ms;
+$animation-duration-fast: 25ms;
+
+// Positioning settings.
+// The default border radius for rounded corners.
+$border-radius-base: 4px;
+
+// The stacking order layers (used with z-index).
+$layer-11: 11000;
+$layer-10: 10000;
+$layer-9: 9000;
+$layer-8: 8000;
+$layer-7: 8000;
+
+// Fonts
+$font_serif: 'Libre Baskerville', serif;
+$font_san_serif: 'Quattrocento Sans', sans-serif;
+
+// Font sizes. Relative numbered names (-80,-90,-100,-110...) are used
+// instead of labels (small, medium, large) to allow easy insertion
+// of additional intermediate sizes. 100 is the baseline.
+// The font sizing mixins in _mixins.scss provide mapping of human-readable labels to font sizes.
+// For actual font size rhythm calculations, see http://modularscale.com.
+// The settings are rounded values of a 16px baseline at a 3:4 perfect forth ratio.
+
+// tiny
+$font_size_80: 9px;
+$font_leading_80: 0.75;
+
+// small
+$font_size_90: 12px;
+$font_leading_90: 0.75;
+
+// base-small
+$font_size_95: 14px;
+$font_leading_95: 1;
+
+// baseline
+$font_size_100: 16px;
+$font_leading_100: 1;
+
+// base-medium
+$font_size_105: 18px;
+$font_leading_105: 1;
+
+// medium
+$font_size_110: 21px;
+$font_leading_110: 1.25;
+
+// medium-large
+$font_size_115: 24px;
+$font_leading_110: 1.25;
+
+// large
+$font_size_120: 28px;
+$font_leading_120: 1.25;
+
+// x-large
+$font_size_130: 38px;
+$font_leading_130: 1.5;

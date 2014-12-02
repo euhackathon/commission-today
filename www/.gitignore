@@ -10,7 +10,8 @@
 # Ignore bundler config.
 /.bundle
 
-.vagrant
+# Ignore the default SQLite database.
+/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -19,6 +20,15 @@
 # Ignore sass files
 *.sassc
 .sass-cache
+
+# Ignore testing files
+.rspec
+/coverage.data
+/coverage/
+/capybara*
+/capybara-*.html
+/spec/screenshots/
+/spec/tmp/*
 
 # Ignore yard docs and db docs
 /doc/*
