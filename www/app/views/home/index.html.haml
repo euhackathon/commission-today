@@ -1,25 +1,52 @@
-%section.content
-  .meeting-table.col-xs-12
-    .meeting-tr.col-xs-12
-      .lobby.meeting-th.col-xs-3
-        Lobby
-      .date.meeting-th.col-xs-3
-        Date
-      .description.meeting-th.col-xs-3
-        Description
-      .member.meeting-th.col-xs-3
-        Member
-    {{#meeting}}
-    .meeting-tr.col-xs-12
-      .lobby.meeting-td.col-xs-3
-        {{lobby}}
-      .date.meeting-td.col-xs-3
-        {{date}}
-      .description.meeting-td.col-xs-3
-        {{description}}
-      .member.meeting-td.col-xs-3
+%section
+  .content
+  .template.hide
+    .meeting-table.col-xs-12
+      .meeting-tr.col-xs-12
+        .member.meeting-th.col-xs-3
+          Name
+        .date.meeting-th.col-xs-3
+          Date
+        .description.meeting-th.col-xs-3
+          Description
+      {{#meeting}}
+      .meeting-tr.col-xs-12
         {{#member}}
-        {{name}}
+        .member.name.meeting-td.col-xs-3{ data: {member:'{{id}}'} }
+          {{name}}
         {{/member}}
-    {{/meeting}}
-    
+        .date-box.meeting-td.col-xs-3
+          .date{ data: {date:'{{date}}'} }
+            %i.fa.fa-calendar
+            {{{date_formatted}}}
+        .description.meeting-td.col-xs-3
+          {{description}}
+          {{#organization}}
+          .organization-box
+            %span.organization
+              %span.label
+                Organization:
+              %span
+                {{name}}. 
+            %div.lobbiest
+              %span.label
+                Lobbyists:
+              {{#registered}}
+              %i.fa.fa-user 
+              %span.registered
+                {{lobbyists}} registered.
+              %div.budget
+                %span.label
+                  Lobby budget:
+                %span
+                  {{money}}.
+              {{/registered}}
+              {{^registered}}
+              %i.fa.fa-user
+              %i.fa.fa-warning
+              %span.unregistered
+                Unregisted lobbyiest!
+              {{/registered}}
+          {{/organization}}
+
+      {{/meeting}}

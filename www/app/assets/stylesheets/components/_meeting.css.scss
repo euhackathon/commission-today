@@ -1,8 +1,10 @@
 .meeting-table {
   display: table;
+  width: 100%;
 }
 .meeting-tr {
   display: table-row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .meeting-tr:nth-child(even) {
@@ -10,22 +12,139 @@
 }
 .meeting-tr:nth-child(odd) {
   background-color: $meeting-row-odd-zebra-background-color;
+  //@include background-image(linear-gradient(top, $meeting-row-odd-zebra-background-color, rgba($meeting-row-odd-zebra-background-color,0.04)));
 }
 .meeting-tr:first-child {
-  background-color: $meeting-row-header-background-color;
-  border-bottom: 1px solid black;
+  background-color: $white;
+  border-bottom: 2px solid black;
+}
+
+.meeting-th {
+  padding: 10px;
+}
+
+.meeting-td {
+  border-top: 1px solid rgba(0,0,0,0.3);
+}
+
+.name {
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.member {
+  width: 130px;
+  padding-right: 10px;
 }
 
 .meeting-td,
 .meeting-th {
   display: table-cell;
-  padding: 10px;
   text-align: left;
+  font-family: $font_san_serif;
+  font-size: $font_size_100;
+  img {
+    height: 40px;
+    width: auto;
+  }
+  .description,
+  .date,
+  .lobby {
+    padding: 10px;
+  }
 }
 
-.meeting-th.lobby,
+.name {
+  font-weight: bold;
+}
+.name,
+.rank,
+.portofolio {
+  font-size: $font_size_90;
+}
+
+.meeting-td.date-box {
+  position: relative;
+}
+
+.meeting-td .date {
+  //@include box-shadow(rgba(0, 0, 0, 0.075) 10px 0px 28px -4px inset);
+  cursor: pointer;
+  margin: 0;
+  min-width: 80px;
+  font-size: $font_size_90;
+  position: absolute;
+  padding-top: 0;
+  padding-bottom: 0;
+  top: 50%;
+  margin-top: -16px;
+  left: 50%;
+  margin-left: -40px;
+
+  .fa {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    font-size: $font_size_110;
+    color: #988B36;
+  }
+
+  .fa:last-child {
+    right: -5px;
+  }
+
+  .day {
+    margin-left: 25px;
+  }
+  .year {
+    display:block;
+    margin-left: 25px;
+  }
+}
+
+.meeting-td .date:hover,
+.meeting-td.member:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.organization-box {
+  margin-top: 5px;
+  color: rgba(0,0,0,0.8);
+  @include border-radius(4px);
+  font-size: $font_size_90;
+  font-family: $font_san_serif_condensed;
+}
+.label {
+  font-weight: bold;
+}
+
+.budget {
+  margin-top: 5px;
+}
+.lobbiest {
+  margin-top: 5px;
+  .name {
+    font-weight: bold;
+  }
+  .fa {
+    font-size: 16px;
+  }
+  .unregistered,
+  .fa-warning {
+    color: rgb(255,0,0);
+  }
+}
+
+.description {
+  vertical-align: middle;
+  padding: 10px;
+  padding-left: 20px;
+}
+
 .meeting-th.date,
 .meeting-th.description,
 .meeting-th.member {
   font-weight: bold;
+  font-size: $font_size_100;
 }

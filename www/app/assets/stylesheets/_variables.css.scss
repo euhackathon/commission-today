@@ -30,7 +30,7 @@ $accentA-dark: shade($accentA-base, 50);
 $accentB: rgb(255,200,56);
 
 // Complements.
-$complement-base: rgb(242,144,191);
+$complement-base: rgb(8, 217, 255);
 $complementA: shade($complement-base, 50);
 $complementB: tint($complement-base, 50);
 
@@ -57,8 +57,8 @@ $alert-bg: $alert-error-base;
 $alert-border-color: $black;
 
 $meeting-row-header-background-color: rgba($complementA, 0.2);
-$meeting-row-even-zebra-background-color: rgba($complementA, 0.01);
-$meeting-row-odd-zebra-background-color: rgba($complementA, 0.09);
+$meeting-row-even-zebra-background-color: rgba($complementA, 0.005);
+$meeting-row-odd-zebra-background-color: rgba($complementA, 0.01);
 
 // END SEMANTIC COLOR VARIABLES
 
@@ -81,6 +81,7 @@ $layer-7: 8000;
 // Fonts
 $font_serif: 'Libre Baskerville', serif;
 $font_san_serif: 'Quattrocento Sans', sans-serif;
+$font_san_serif_condensed: 'Oswald', sans-serif;
 
 // Font sizes. Relative numbered names (-80,-90,-100,-110...) are used
 // instead of labels (small, medium, large) to allow easy insertion

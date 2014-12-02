@@ -10,31 +10,87 @@ require([
 ],
 function (Client, Mustache) {
   'use strict';
+  var MONTH_NAMES = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
   var _statusHtml = document.querySelector('.loading-status');
   var _view;
-  var client = Client.create('http://palcu.ro:8000/api/v1/');
-  client.get('meeting');
-  client.addEventListener('dataloaded', _initialDataLoaded);
+  var _client = Client.create('http://palcu.ro:8000/api/v1/');
+  _client.get('meeting', {'order_by':'date'});
+  _client.addEventListener('dataloaded', _meetingDataLoaded);
 
-  function _initialDataLoaded(evt) {
+  function _meetingDataLoaded(evt) {
+    console.log(_client.response);
     _view = {
-      meeting : client.response.meeting.objects
+      meeting : _client.response.meeting.objects
+    }
+
+    // Remove photos that are subsequent to each other.
+    var origPhoto, lastPhoto;
+    for (var p = 0; p < _view.meeting.length; p++) {
+      _formatDate(_view.meeting[p]);
+      origPhoto = _view.meeting[p].member.photoUrl;
+      if (_view.meeting[p].member.photoUrl === lastPhoto) {
+        _view.meeting[p].member.photoUrl = '';
+      }
+      lastPhoto = origPhoto;
     }
 
     _renderTemplate();
   }
 
+  function _formatDate(meeting) {
+    var d = new Date(meeting.date*1000);
+    meeting.date_formatted = "<span class='day'>" + d.getDate() + "</span> " +
+                             "<span class='month'>" + MONTH_NAMES[d.getMonth()] + "</span>" +
+                             "<span class='year'>" + d.getFullYear() + "</span>";
+    meeting.date = d.getFullYear() + '-' + Number(d.getMonth()+1) + '-' + d.getDate();
+  }
+
   function _renderTemplate() {
-    var template = document.querySelector('.content');
+    var template = document.querySelector('.template');
+    var target = document.querySelector('.content')
 
     // Render mustache template and apply to page.
     var rendered = Mustache.render(template.innerHTML, _view);
-    template.innerHTML = rendered;
+    target.innerHTML = rendered;
+
+    // Set up links for dates.
+    var dates = target.querySelectorAll('.date');
+    for (var d = 0; d < dates.length; d++) {
+      dates[d].addEventListener('click', _dateClicked, false);
+    }
+
+    // Set up links for members.
+    var members = target.querySelectorAll('.member');
+    for (var m = 0; m < members.length; m++) {
+      members[m].addEventListener('click', _memberClicked, false);
+    }
 
     // Fade-out loading screen when everything loads.
     $(_statusHtml).fadeOut('slow', function() {
-      template.classList.remove('hide');
+      target.classList.remove('hide');
     });
   }
 
+  function _dateClicked(evt) {
+    _client.flush();
+    _client.get('meeting', {'date':evt.currentTarget.getAttribute('data-date'), 'order_by':'date'});
+  }
+
+  function _memberClicked(evt) {
+    _client.flush();
+    _client.get('meeting', {'member':evt.currentTarget.getAttribute('data-member'), 'order_by':'date'})
+  }
 });

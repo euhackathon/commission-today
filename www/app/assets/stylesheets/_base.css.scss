@@ -134,8 +134,7 @@ ul {
 //=================================================================================
 // Content area is everything visible on the page.
 // This section sets up the header and footer, but not the main content area.
-#content {
-  background: $white;
+.content {
 
   // Main page header and logo area.
   > header {
@@ -143,19 +142,25 @@ ul {
     z-index: 9999;
 
     width: 100%;
-    background: $white;
-    border-bottom: 2px solid $main-border-color;
     @include box-sizing(border-box);
 
     font-size: $font_size_100;
 
-    h1 {
-        font-size: $font_size_110;
-        @include inline-block();
-        margin-left: 13px;
-        padding-top: 4px;
-        padding-bottom: 3px;
-    }
+  }
+}
+
+#content-header {
+  //background: $meeting-row-header-background-color;
+  @include background-image(linear-gradient(top, $meeting-row-odd-zebra-background-color, rgba($meeting-row-odd-zebra-background-color,0.1)));
+  border-bottom: 2px solid $main-border-color;
+  @include box-shadow(rgba(0, 0, 0, 0.075) 10px 0px 28px -4px inset);
+  h1 {
+    color: #988B36;
+    font-size: $font_size_120;
+    @include inline-block();
+    margin: 10px;
+    padding-top: 4px;
+    padding-bottom: 3px;
   }
 }
 

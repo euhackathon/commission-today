@@ -29,14 +29,51 @@ function ($) {
       options = options || {};
 
       var params = '';
+      var delimiter;
+      var urlAndParams = url;
       if (options.page) {
-         var delimiter = '?';
-        if (url.indexOf('?') != -1)
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
           delimiter = '&';
         params = delimiter + 'page=' + options.page;
+        urlAndParams += params;
       }
+      if (options.limit) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'limit=' + options.limit;
+        urlAndParams += params;
+      }
+      if (options.order_by) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'order_by=' + options.order_by;
+        urlAndParams += params;
+      }
+      if (options.date) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'date=' + options.date;
+        urlAndParams += params;
+      }
+      if (options.member) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'member=' + options.member;
+        urlAndParams += params;
+      }
+      
+      delimiter = '?';
+      if (urlAndParams.indexOf('?') != -1)
+        delimiter = '&';
+      urlAndParams += delimiter + 'format=json';
+
       _dispatchEvent('dataloading', {'path':url});
-      $.getJSON(_baseURL + url + params + '?format=json', function(data, status, xhr) {
+      $.getJSON(_baseURL + urlAndParams, function(data, status, xhr) {
         if (status === 'success')
           _dataLoaded(data, url, options.page, options.callback);
         // TODO: Add handling for different server responses:
@@ -44,6 +81,11 @@ function ($) {
       });
     }
 
+    function flush() {
+      response = {};
+      _instance.response = {};
+    }
+ 
     // @param data [Object] The data payload of the response to a get request.
     // @param url [String] The URL passed to a get request for this response.
     // @param callback [Function] An optional callback function to execute when
@@ -80,7 +122,7 @@ function ($) {
         lastPath[token] = {};
       if (count !== numTokens)
         lastPath = lastPath[token];
-      while (count+1 < numTokens) {
+      while (count < numTokens) {
         token = tokens[count++];
         if (!lastPath[token])
           lastPath[token] = {};
@@ -94,6 +136,9 @@ function ($) {
         if (data.hasOwnProperty(d))
           lastNode[d] = data[d];
       }
+
+      // Refresh the response output.
+      _instance.response = response;
     }
 
     // @param event [String] The event name to listen for.
@@ -131,6 +176,7 @@ function ($) {
     }
 
     _instance.get = get;
+    _instance.flush = flush;
     _instance.addEventListener = addEventListener;
     _instance.removeEventListener = removeEventListener;
     _instance.response = response;
