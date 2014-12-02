@@ -1,0 +1,31 @@
+.meeting-table {
+  display: table;
+}
+.meeting-tr {
+  display: table-row;
+}
+
+.meeting-tr:nth-child(even) {
+  background-color: $meeting-row-even-zebra-background-color;
+}
+.meeting-tr:nth-child(odd) {
+  background-color: $meeting-row-odd-zebra-background-color;
+}
+.meeting-tr:first-child {
+  background-color: $meeting-row-header-background-color;
+  border-bottom: 1px solid black;
+}
+
+.meeting-td,
+.meeting-th {
+  display: table-cell;
+  padding: 10px;
+  text-align: left;
+}
+
+.meeting-th.lobby,
+.meeting-th.date,
+.meeting-th.description,
+.meeting-th.member {
+  font-weight: bold;
+}

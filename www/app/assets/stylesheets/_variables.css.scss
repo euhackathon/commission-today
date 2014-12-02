@@ -56,9 +56,11 @@ $alert-color: $black;
 $alert-bg: $alert-error-base;
 $alert-border-color: $black;
 
+$meeting-row-header-background-color: rgba($complementA, 0.2);
+$meeting-row-even-zebra-background-color: rgba($complementA, 0.01);
+$meeting-row-odd-zebra-background-color: rgba($complementA, 0.09);
+
 // END SEMANTIC COLOR VARIABLES
-
-
 
 // Animation settings.
 $animation-duration-slow: 100ms;

@@ -1,2 +1,25 @@
-%section#content
-  Content
+%section.content
+  .meeting-table.col-xs-12
+    .meeting-tr.col-xs-12
+      .lobby.meeting-th.col-xs-3
+        Lobby
+      .date.meeting-th.col-xs-3
+        Date
+      .description.meeting-th.col-xs-3
+        Description
+      .member.meeting-th.col-xs-3
+        Member
+    {{#meeting}}
+    .meeting-tr.col-xs-12
+      .lobby.meeting-td.col-xs-3
+        {{lobby}}
+      .date.meeting-td.col-xs-3
+        {{date}}
+      .description.meeting-td.col-xs-3
+        {{description}}
+      .member.meeting-td.col-xs-3
+        {{#member}}
+        {{name}}
+        {{/member}}
+    {{/meeting}}
+    
