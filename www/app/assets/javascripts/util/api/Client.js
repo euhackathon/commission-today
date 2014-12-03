@@ -28,6 +28,7 @@ function ($) {
     function get(url, options) {
       options = options || {};
 
+      // TODO consolidate parameter parsing.
       var params = '';
       var delimiter;
       var urlAndParams = url;
@@ -57,6 +58,20 @@ function ($) {
         if (urlAndParams.indexOf('?') != -1)
           delimiter = '&';
         params = delimiter + 'date=' + options.date;
+        urlAndParams += params;
+      }
+      if (options.date__lt) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'date__lt=' + options.date__lt;
+        urlAndParams += params;
+      }
+      if (options.date__gt) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'date__gt=' + options.date__gt;
         urlAndParams += params;
       }
       if (options.member) {

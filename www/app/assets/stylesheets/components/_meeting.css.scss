@@ -33,7 +33,7 @@
 }
 
 .member {
-  width: 130px;
+  width: 100px;
   padding-right: 10px;
 }
 
@@ -65,6 +65,15 @@
 
 .meeting-td.date-box {
   position: relative;
+}
+
+.timespan {
+  font-size: $font_size_80;
+  font-weight: normal;
+}
+
+.meeting-th.date {
+  width: 53px;
 }
 
 .meeting-td .date {
@@ -103,10 +112,31 @@
 }
 
 .meeting-td .date:hover,
-.meeting-td.member:hover {
+.meeting-td.member:hover,
+.all:hover,
+.today:hover,
+.past:hover,
+.future:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.timespan {
+  color: rgba(0,0,0,0.4);
+}
+
+.all,
+.today,
+.past,
+.future {
+  color: $black;
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: none;
+}
+
 
 .organization-box {
   margin-top: 5px;
