@@ -81,7 +81,14 @@ function ($) {
         params = delimiter + 'member=' + options.member;
         urlAndParams += params;
       }
-      
+      if (options.q) {
+         delimiter = '?';
+        if (urlAndParams.indexOf('?') != -1)
+          delimiter = '&';
+        params = delimiter + 'q=' + options.q;
+        urlAndParams += params;
+      }
+
       delimiter = '?';
       if (urlAndParams.indexOf('?') != -1)
         delimiter = '&';

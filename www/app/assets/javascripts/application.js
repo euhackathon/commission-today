@@ -24,7 +24,7 @@ function (Client, Mustache) {
     'Nov',
     'Dec'
   ];
-  var _lastDateSelected;
+  var _searchInput;
   var _statusHtml = document.querySelector('.loading-status');
   var _view;
   var _client = Client.create('http://palcu.ro:8000/api/v1/');
@@ -32,8 +32,15 @@ function (Client, Mustache) {
   _client.addEventListener('dataloaded', _meetingDataLoaded);
 
   function _meetingDataLoaded(evt) {
-    _view = {
-      meeting : _client.response.meeting.objects
+
+    if (_client.response.meeting.search) {
+      _view = {
+        meeting : _client.response.meeting.search.objects
+      }
+    } else {
+      _view = {
+        meeting : _client.response.meeting.objects
+      }
     }
 
     // Remove photos that are subsequent to each other.
@@ -84,6 +91,10 @@ function (Client, Mustache) {
     target.querySelector('.past').addEventListener('click', _pastDateClicked, false);
     target.querySelector('.future').addEventListener('click', _futureDateClicked, false);
 
+    // Set up keyword search.
+    _searchInput = document.querySelector('.search input');
+    _searchInput.addEventListener('keydown', _searchKeyPressed, false);
+
     // Fade-out loading screen when everything loads.
     $(_statusHtml).fadeOut('slow', function() {
       target.classList.remove('hide');
@@ -97,7 +108,7 @@ function (Client, Mustache) {
 
   function _allDateClicked(evt) {
     _client.flush();
-    _client.get('meeting', {'order_by':'date'});
+    _client.get('meeting', {'order_by':'-date'});
   }
 
   function _todayDateClicked(evt) {
@@ -123,6 +134,14 @@ function (Client, Mustache) {
 
   function _memberClicked(evt) {
     _client.flush();
-    _client.get('meeting', {'member':evt.currentTarget.parentNode.getAttribute('data-member'), 'order_by':'date'})
+    _client.get('meeting', {'member':evt.currentTarget.parentNode.getAttribute('data-member'), 'order_by':'date'});
+  }
+
+  function _searchKeyPressed(evt) {
+    if (evt.keyCode === 13) {
+      _client.flush();
+      _client.get('meeting/search', {'q':_searchInput.value, 'order_by':'date'});
+      _searchInput.value = '';
+    }
   }
 });
