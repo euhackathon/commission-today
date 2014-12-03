@@ -25,7 +25,6 @@ function (Client, Mustache) {
     'Dec'
   ];
   var _searchInput;
-  var _statusHtml = document.querySelector('.loading-status');
   var _view;
   var _client = Client.create('http://palcu.ro:8000/api/v1/');
   _client.get('meeting', {'order_by':'-date'});
@@ -94,21 +93,18 @@ function (Client, Mustache) {
     // Set up keyword search.
     _searchInput = document.querySelector('.search input');
     _searchInput.addEventListener('keydown', _searchKeyPressed, false);
-
-    // Fade-out loading screen when everything loads.
-    $(_statusHtml).fadeOut('slow', function() {
-      target.classList.remove('hide');
-    });
   }
 
   function _dateClicked(evt) {
     _client.flush();
     _client.get('meeting', {'date':evt.currentTarget.getAttribute('data-date'), 'order_by':'date'});
+    _searchInput.value = '';
   }
 
   function _allDateClicked(evt) {
     _client.flush();
     _client.get('meeting', {'order_by':'-date'});
+    _searchInput.value = '';
   }
 
   function _todayDateClicked(evt) {
@@ -116,6 +112,7 @@ function (Client, Mustache) {
     var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
     _client.flush();
     _client.get('meeting', {'date':d, 'order_by':'date'});
+    _searchInput.value = '';
   }
 
   function _pastDateClicked(evt) {
@@ -123,6 +120,7 @@ function (Client, Mustache) {
     var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
     _client.flush();
     _client.get('meeting', {'date__lt':d, 'order_by':'-date'});
+    _searchInput.value = '';
   }
 
   function _futureDateClicked(evt) {
@@ -130,18 +128,19 @@ function (Client, Mustache) {
     var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
     _client.flush();
     _client.get('meeting', {'date__gt':d, 'order_by':'-date'});
+    _searchInput.value = '';
   }
 
   function _memberClicked(evt) {
     _client.flush();
     _client.get('meeting', {'member':evt.currentTarget.parentNode.getAttribute('data-member'), 'order_by':'date'});
+    _searchInput.value = '';
   }
 
   function _searchKeyPressed(evt) {
     if (evt.keyCode === 13) {
       _client.flush();
       _client.get('meeting/search', {'q':_searchInput.value, 'order_by':'date'});
-      _searchInput.value = '';
     }
   }
 });
