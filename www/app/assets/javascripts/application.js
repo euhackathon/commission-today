@@ -28,7 +28,7 @@ function (Client, Mustache) {
   var _statusHtml = document.querySelector('.loading-status');
   var _view;
   var _client = Client.create('http://palcu.ro:8000/api/v1/');
-  _client.get('meeting', {'order_by':'date'});
+  _client.get('meeting', {'order_by':'-date'});
   _client.addEventListener('dataloaded', _meetingDataLoaded);
 
   function _meetingDataLoaded(evt) {
