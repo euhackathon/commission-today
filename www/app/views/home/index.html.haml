@@ -4,15 +4,13 @@
     .meeting-table.col-xs-12
       .meeting-tr.col-xs-12
         .date.meeting-th.col-xs-3
-          Date
+          Meetings
           .timespan
-            %span.all
-              All
+            %span.past
+              Past
             |
             %span.today
               Today
-            %span.past
-              Past
             |
             %span.future
               Future
@@ -25,10 +23,12 @@
         .date-box.meeting-td.col-xs-3
           .date{ data: {date:'{{date}}'} }
             %i.fa.fa-calendar
-            {{{date_formatted}}}
+            %span.datestamp
+              {{{date_formatted}}}
         {{#member}}
-        .member.name.meeting-td.col-xs-3{ data: {member:'{{id}}'} }
-          {{name}}
+        .member.meeting-td.col-xs-3{ data: {member:'{{id}}'} }
+          .name
+            {{name}}
         {{/member}}
         .description.meeting-td.col-xs-3
           {{description}}
