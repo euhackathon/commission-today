@@ -23,7 +23,8 @@ function (Client, Mustache) {
     'Oct',
     'Nov',
     'Dec'
-  ]
+  ];
+  var _lastDateSelected;
   var _statusHtml = document.querySelector('.loading-status');
   var _view;
   var _client = Client.create('http://palcu.ro:8000/api/v1/');
@@ -31,7 +32,6 @@ function (Client, Mustache) {
   _client.addEventListener('dataloaded', _meetingDataLoaded);
 
   function _meetingDataLoaded(evt) {
-    console.log(_client.response);
     _view = {
       meeting : _client.response.meeting.objects
     }
@@ -68,7 +68,7 @@ function (Client, Mustache) {
 
     // Set up links for dates.
     var dates = target.querySelectorAll('.date');
-    for (var d = 0; d < dates.length; d++) {
+    for (var d = 1; d < dates.length; d++) {
       dates[d].addEventListener('click', _dateClicked, false);
     }
 
@@ -77,6 +77,12 @@ function (Client, Mustache) {
     for (var m = 0; m < members.length; m++) {
       members[m].addEventListener('click', _memberClicked, false);
     }
+
+    // Set up date range links.
+    target.querySelector('.all').addEventListener('click', _allDateClicked, false);
+    target.querySelector('.today').addEventListener('click', _todayDateClicked, false);
+    target.querySelector('.past').addEventListener('click', _pastDateClicked, false);
+    target.querySelector('.future').addEventListener('click', _futureDateClicked, false);
 
     // Fade-out loading screen when everything loads.
     $(_statusHtml).fadeOut('slow', function() {
@@ -87,6 +93,32 @@ function (Client, Mustache) {
   function _dateClicked(evt) {
     _client.flush();
     _client.get('meeting', {'date':evt.currentTarget.getAttribute('data-date'), 'order_by':'date'});
+  }
+
+  function _allDateClicked(evt) {
+    _client.flush();
+    _client.get('meeting', {'order_by':'date'});
+  }
+
+  function _todayDateClicked(evt) {
+    var today = new Date();
+    var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
+    _client.flush();
+    _client.get('meeting', {'date':d, 'order_by':'date'});
+  }
+
+  function _pastDateClicked(evt) {
+    var today = new Date();
+    var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
+    _client.flush();
+    _client.get('meeting', {'date__lt':d, 'order_by':'date'});
+  }
+
+  function _futureDateClicked(evt) {
+    var today = new Date();
+    var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
+    _client.flush();
+    _client.get('meeting', {'date__gt':d, 'order_by':'date'});
   }
 
   function _memberClicked(evt) {
