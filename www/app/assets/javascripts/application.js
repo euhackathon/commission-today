@@ -129,7 +129,7 @@ function (Client, Mustache) {
     var today = new Date();
     var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
     _client.flush();
-    _client.get('meeting', {'date__gt':d, 'order_by':'date'});
+    _client.get('meeting', {'date__gt':d, 'order_by':'-date'});
   }
 
   function _memberClicked(evt) {
