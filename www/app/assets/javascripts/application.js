@@ -53,7 +53,7 @@ function (Client, Mustache) {
   function _formatDate(meeting) {
     var d = new Date(meeting.date*1000);
     meeting.date_formatted = "<span class='day'>" + d.getDate() + "</span> " +
-                             "<span class='month'>" + MONTH_NAMES[d.getMonth()] + "</span>" +
+                             "<span class='month'>" + MONTH_NAMES[d.getMonth()] + "</span>, " +
                              "<span class='year'>" + d.getFullYear() + "</span>";
     meeting.date = d.getFullYear() + '-' + Number(d.getMonth()+1) + '-' + d.getDate();
   }
@@ -79,7 +79,7 @@ function (Client, Mustache) {
     }
 
     // Set up date range links.
-    target.querySelector('.all').addEventListener('click', _allDateClicked, false);
+    //target.querySelector('.all').addEventListener('click', _allDateClicked, false);
     target.querySelector('.today').addEventListener('click', _todayDateClicked, false);
     target.querySelector('.past').addEventListener('click', _pastDateClicked, false);
     target.querySelector('.future').addEventListener('click', _futureDateClicked, false);
@@ -111,7 +111,7 @@ function (Client, Mustache) {
     var today = new Date();
     var d =  today.getFullYear() + '-' + Number(today.getMonth()+1) + '-' + today.getDate();
     _client.flush();
-    _client.get('meeting', {'date__lt':d, 'order_by':'date'});
+    _client.get('meeting', {'date__lt':d, 'order_by':'-date'});
   }
 
   function _futureDateClicked(evt) {
