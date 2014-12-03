@@ -150,7 +150,11 @@ ul {
 }
 
 #content-header {
-  //background: $meeting-row-header-background-color;
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  margin-top: -125px;
+  background: $white;
   @include background-image(linear-gradient(top, $meeting-row-odd-zebra-background-color, rgba($meeting-row-odd-zebra-background-color,0.1)));
   border-bottom: 2px solid $main-border-color;
   @include box-shadow(rgba(0, 0, 0, 0.075) 10px 0px 28px -4px inset);
@@ -162,6 +166,18 @@ ul {
     padding-top: 4px;
     padding-bottom: 3px;
   }
+  h2 {
+    display: inline-block;
+    font-size: 14px;
+    position: relative;
+    top: 6px;
+  }
+}
+
+.content {
+  position: relative;
+  margin-top: 125px;
+  z-index: 9000;
 }
 
 #app-footer {

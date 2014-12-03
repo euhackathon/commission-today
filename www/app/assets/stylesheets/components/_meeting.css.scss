@@ -16,7 +16,11 @@
 }
 .meeting-tr:first-child {
   background-color: $white;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  margin-top: -57px;
 }
 
 .meeting-th {
@@ -27,7 +31,7 @@
   border-top: 1px solid rgba(0,0,0,0.3);
 }
 
-.name {
+.member {
   padding-left: 10px;
 }
 
@@ -72,7 +76,8 @@
   font-weight: normal;
 }
 
-.meeting-th.date {
+.date,
+.date-box {
   width: 111px;
 }
 
@@ -84,7 +89,7 @@
   position: absolute;
   padding-top: 0;
   padding-bottom: 0;
-  margin-top: 13px;
+  margin-top: 9px;
   margin-left: 0;
 
   .fa {
@@ -109,8 +114,8 @@
 }
 
 .meeting-td .date:hover,
-.meeting-td.member:hover,
-.timestamp:hover,
+.meeting-td.member .name:hover,
+.datestamp:hover,
 .all:hover,
 .today:hover,
 .past:hover,

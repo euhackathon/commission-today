@@ -73,13 +73,13 @@ function (Client, Mustache) {
     }
 
     // Set up links for members.
-    var members = target.querySelectorAll('.member');
+    var members = target.querySelectorAll('.member .name');
     for (var m = 0; m < members.length; m++) {
       members[m].addEventListener('click', _memberClicked, false);
     }
 
     // Set up date range links.
-    //target.querySelector('.all').addEventListener('click', _allDateClicked, false);
+    document.querySelector('.all').addEventListener('click', _allDateClicked, false);
     target.querySelector('.today').addEventListener('click', _todayDateClicked, false);
     target.querySelector('.past').addEventListener('click', _pastDateClicked, false);
     target.querySelector('.future').addEventListener('click', _futureDateClicked, false);
