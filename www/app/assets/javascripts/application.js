@@ -123,6 +123,6 @@ function (Client, Mustache) {
 
   function _memberClicked(evt) {
     _client.flush();
-    _client.get('meeting', {'member':evt.currentTarget.getAttribute('data-member'), 'order_by':'date'})
+    _client.get('meeting', {'member':evt.currentTarget.parentNode.getAttribute('data-member'), 'order_by':'date'})
   }
 });
